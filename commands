@@ -35,3 +35,12 @@ chmod 644 ./var/www/html/app/info.php
 	docker compose up -d
 ls -Z ./var/www/html/app (user or container owned info)
 ls -Zd (for only main directory)
+
+beyond :)
+docker sbom nginx
+docker inspect nginx
+
+docker stats nginx (steps below to fake stress cpu)
+sudo apt-get install stress
+stress --cpu 2 --timeout 60
+
