@@ -1,0 +1,66 @@
+
+🐳 Docker Command Cheat Sheet
+
+🔹 1. Container lifecycle
+docker run -d -p 8000:80 --name somename nginx
+  - docker run → create + start a container
+  - -d → detached mode (runs in background)
+  - -p 8000:80 → map host port 8000 → container port 80
+  - --name somename → give it a nice name
+  - nginx → the image to run
+
+Other lifecycle commands:
+docker ps                 # List running containers
+docker ps -a              # List all containers (stopped too)
+docker start somename     # Start an existing container
+docker stop somename      # Stop it gracefully
+docker restart somename   # Stop + start
+docker rm somename        # Remove container
+docker rm -f somename     # Force remove running container
+
+🔹 2. Images
+docker images             # List images
+docker pull nginx         # Download latest image
+docker rmi nginx          # Remove image
+docker build -t myapp .   # Build image from Dockerfile
+
+🔹 3. Volumes (persistent data)
+docker volume create myvol                # Create a volume
+docker run -v myvol:/data busybox         # Mount volume into container
+docker volume ls                          # List volumes
+docker volume rm myvol                    # Remove volume
+
+🔹 4. Networks
+docker network ls                         # List networks
+docker network create mynet               # Create network
+docker run --network=mynet nginx          # Attach container to network
+
+🔹 5. Exec & Logs
+docker exec -it somename bash             # Open shell in container
+docker logs somename                      # View logs
+docker logs -f somename                   # Follow logs live
+
+🔹 6. System Cleanup
+docker system df                          # Show disk usage
+docker system prune                       # Remove stopped containers + unused data
+docker image prune                        # Remove unused images
+docker volume prune                       # Remove unused volumes
+
+🔹 7. Docker Compose equivalents
+docker compose up -d          # Start stack in background
+docker compose down           # Stop + remove
+docker compose stop/start     # Pause/resume
+docker compose ps             # List services
+docker compose logs -f        # Tail logs
+
+✅ Quick mnemonic for docker run:
+docker run [OPTIONS] IMAGE [COMMAND]
+
+Most common options:
+- -d → detached
+- -p host:container → ports
+- -v host:container → volumes
+- --name → name
+- --rm → auto-remove after exit
+- -e KEY=VALUE → environment variables
+- --network → attach to network

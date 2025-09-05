@@ -1,0 +1,37 @@
+docker images
+docker ps -a, docker ps -aq
+docker build
+docker run
+docker run -d -p 8000:80 --name somename nginx
+
+docker start
+docker stop
+docker exec -it <container> cmd
+docker exec -it --user root docker-server-nginx-1 ls -l /var/www/html 
+docker compose build 
+docker compose up --build
+docker compose stop 
+docker compose start
+docker compose kill
+docker compose down
+docker compose run 
+docker compose run --rm php php -v
+Map the ports defined in docker-compose.yml (useful if you want to run something like a test web server).
+docker compose run --no-deps php php artisan migrate
+docker compose run -e APP_ENV=testing php php artisan test
+
+docker rm -f $(docker ps -aq)
+docker rm <container_id>
+docker container prune (delete only stopped containers)
+	docker-compose down
+	docker-compose up -d
+docker-compose restart <container id>
+	sudo chcon -Rt svirt_sandbox_file_t ./var/www/html/app
+	sudo chcon -t  svirt_sandbox_file_t ./nginx.conf
+:z or :Z
+chmod 644 ./var/www/html/app/info.php
+	export UID=$(id -u)
+	export GID=$(id -g)
+	docker compose up -d
+ls -Z ./var/www/html/app (user or container owned info)
+ls -Zd (for only main directory)
